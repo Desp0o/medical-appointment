@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { setUser } from "../../redux/userSlicer"
 import { useNavigate } from "react-router-dom"
+import "./login.css"
 
 const LogIn = () => {
   const dispatch = useDispatch()
@@ -29,7 +30,7 @@ const LogIn = () => {
       localStorage.setItem("userName", res.data.user.name)
       localStorage.setItem("userID", res.data.user.id)
       localStorage.setItem("isAuthenticated", "true")
-      
+
       dispatch(setUser({
         userName: res.data.user.name,
         isAuthenticated: true
@@ -42,26 +43,28 @@ const LogIn = () => {
 
   return (
     <div className="login_page">
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleLogin} className="login_form">
         <input 
           type="text" 
           className="login_input" 
           placeholder="user" 
           value={loginData.email} 
           name="name" 
+          required
           onChange={(e) => setLoginData({...loginData, email: e.target.value})}
         />
 
         <input 
           type="password" 
           className="login_input" 
-          placeholder="user" 
+          placeholder="password" 
           value={loginData.password} 
           name="password" 
+          required
           onChange={(e) => setLoginData({...loginData, password: e.target.value})}
         />
 
-        <button>login</button>
+        <button className="login_button">login</button>
 
       </form>
     </div>
