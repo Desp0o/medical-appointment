@@ -36,7 +36,7 @@ const Navbar = () => {
             </Link>
 
             <div className='nav_menu'>
-                <Link to='/' className='block_wrapper' onClick={() => tabHandler("main")}>
+                <Link to='/home' className='block_wrapper' onClick={() => tabHandler("main")}>
                     {activeTab === 'main' && <span className='block_border_left' />}
                     <NacIconBlock child={<HomeIcon />} />
                 </Link>

@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import activeTabSlice from "./activeTabSlice";
+import userSlicer from "./userSlicer";
 
 
 const store = configureStore({
     reducer:{
-        activeTabStore: activeTabSlice
+        activeTabStore: activeTabSlice,
+        userStore: userSlicer
     }
 })
 
