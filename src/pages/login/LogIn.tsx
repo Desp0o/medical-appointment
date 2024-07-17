@@ -33,7 +33,8 @@ const LogIn = () => {
 
       dispatch(setUser({
         userName: res.data.user.name,
-        isAuthenticated: true
+        isAuthenticated: true,
+        userID: res.data.user.id
       }))
       redirect("/home")
     } catch (error) {

@@ -4,6 +4,7 @@ interface RootState{
     userStore:{
         name: string;
         isAuthenticated: boolean;
+        userID: number | null;
     }
 }
 

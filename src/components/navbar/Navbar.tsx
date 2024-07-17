@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import HomeIcon from '../../assets/HomeIcon';
 import { setActiveTab } from '../../redux/activeTabSlice';
 import ExitIcon from '../../assets/ExitIcon';
+import { setUser } from '../../redux/userSlicer';
 
 interface RootState {
     activeTabStore: {
@@ -20,13 +21,21 @@ const Navbar = () => {
     const activeTab = useSelector((state: RootState) => state.activeTabStore.value)
     const dispatch = useDispatch()
 
-    const tabHandler = (name:string) => {
+    const tabHandler = (name: string) => {
         dispatch(setActiveTab(name))
     }
 
     const logOurHandler = () => {
-        console.log("logged out");
-        
+        dispatch(setUser({
+            userName: '',
+            isAuthenticated: false,
+            userID: null
+        }))
+
+        localStorage.removeItem("isAuthenticated")
+        localStorage.removeItem("userName")
+        localStorage.removeItem("token")
+        localStorage.removeItem("userID")
     }
 
     return (

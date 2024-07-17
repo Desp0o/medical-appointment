@@ -4,17 +4,10 @@ import Navbar from './components/navbar/Navbar'
 import PrivateRoute from './components/PrivateRoutes'
 import Home from './pages/Home/Home'
 import { UseUserHook } from './hooks/UseUserHook'
-import { useEffect } from 'react'
 
 
 function App() {
-
   const { user } = UseUserHook()
-
-  useEffect(()=>{
-    console.log(user);
-    
-  },[user])
 
   return (
     <>
