@@ -1,13 +1,28 @@
+*, *::after, *::before{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --nav-bg: #F4F9FE;
+  --secondary_blue: #6B9EFF;
+}
+
+a{
+  width: fit-content;
+  height: fit-content;
 }
 
 body {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  overscroll-behavior: none;
 }
 
