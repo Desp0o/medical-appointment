@@ -8,6 +8,7 @@ import Notes from '../../assets/Notes';
 import { useDispatch, useSelector } from 'react-redux';
 import HomeIcon from '../../assets/HomeIcon';
 import { setActiveTab } from '../../redux/activeTabSlice';
+import ExitIcon from '../../assets/ExitIcon';
 
 interface RootState {
     activeTabStore: {
@@ -21,6 +22,11 @@ const Navbar = () => {
 
     const tabHandler = (name:string) => {
         dispatch(setActiveTab(name))
+    }
+
+    const logOurHandler = () => {
+        console.log("logged out");
+        
     }
 
     return (
@@ -49,6 +55,10 @@ const Navbar = () => {
                     {activeTab === 'notes' && <span className='block_border_left' />}
                     <NacIconBlock child={<Notes />} />
                 </Link>
+            </div>
+
+            <div className='navbar_exit_wrapper' onClick={logOurHandler}>
+                <ExitIcon />
             </div>
 
         </nav>
