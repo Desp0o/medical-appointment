@@ -26,7 +26,6 @@ const LogIn = () => {
           },
         }
       )
-      console.log(res.data);
 
       localStorage.setItem("token", res.data.token)
       localStorage.setItem("userName", res.data.user.name)
