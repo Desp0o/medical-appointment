@@ -43,6 +43,12 @@ function App() {
         localStorage.removeItem('userID')
         localStorage.removeItem('bells')
         localStorage.removeItem('isAuthenticated')
+
+        dispatch(setUser({
+          userName: '',
+          isAuthenticated: false,
+          userID: null
+        }))
       }finally{
         setLoading(false)
       }
