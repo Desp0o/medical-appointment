@@ -10,6 +10,7 @@ import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { setUser } from './redux/userSlicer'
 import Spinner from './components/spinner/Spinner'
+import PageLayout from './components/pageLayout/PageLayout'
 
 
 function App() {
@@ -59,7 +60,7 @@ function App() {
   },[dispatch])
 
   return (
-    <>
+    <PageLayout>
       {user.isAuthenticated && <Navbar />}
       {isLoading && <Spinner />}
       <Routes>
@@ -71,7 +72,7 @@ function App() {
           <Route path='/home' element={<Home />} />
         </Route>
       </Routes>
-    </>
+    </PageLayout>
   )
 }
 
