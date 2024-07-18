@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux"
 import { setUser } from "../../redux/userSlicer"
 import { useNavigate } from "react-router-dom"
 import "./login.css"
+import Spinner from "../../components/spinner/Spinner"
 
 const LogIn = () => {
   const dispatch = useDispatch()
@@ -12,10 +13,11 @@ const LogIn = () => {
     email: "",
     password: "",
   })
+  const [isLoading, setLoading] = useState(false)
 
   const handleLogin = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
-
+    setLoading(true)
     try {
       const res = await axios.post(import.meta.env.VITE_LOGIN, loginData,
         {
@@ -39,11 +41,14 @@ const LogIn = () => {
       redirect("/home")
     } catch (error) {
       console.error(error)
+    }finally{
+      setLoading(false)
     }
   }
 
   return (
     <div className="login_page">
+      {isLoading && <Spinner />}
       <form onSubmit={handleLogin} className="login_form">
         <input 
           type="text" 
