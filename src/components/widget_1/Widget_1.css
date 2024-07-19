@@ -1,5 +1,8 @@
 .Widget_1{
     width: 314px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
 }
 
 .widget_1_block{
@@ -20,6 +23,11 @@
     box-shadow: 3px 10px 18px 0px rgba(0, 0, 0, 0.18);
     -webkit-box-shadow: 3px 10px 18px 0px rgba(0, 0, 0, 0.18);
     -moz-box-shadow: 3px 10px 18px 0px rgba(0, 0, 0, 0.18);
+}
+
+.widget_1_block.transparent{
+    color: #000;
+    background-color: #F4F9FE;
 }
 
 .widget_1_block_top{
