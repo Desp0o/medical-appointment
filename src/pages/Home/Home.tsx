@@ -1,57 +1,81 @@
+import { useState } from 'react';
 import "./home.css";
-import dayjs from 'dayjs';
-import { DatePicker, DatePickerProps } from 'antd';
-import { useState } from "react";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
-const range = (start: number, end: number) => Array.from({ length: end - start }, (_, i) => i + start);
+const bookedDates = [
+  {
+    day: 19, // Day of the month
+    hours: [
+      {
+        start: 'Fri Jul 19 2024 00:00:00 GMT+0400 (Georgia Standard Time)',
+        end: 'Fri Jul 19 2024 00:10:00 GMT+0400 (Georgia Standard Time)'
+      },
+      {
+        start: 'Fri Jul 19 2024 17:10:00 GMT+0400 (Georgia Standard Time)',
+        end: 'Fri Jul 19 2024 18:10:00 GMT+0400 (Georgia Standard Time)'
+      }
+    ]
+  },
 
-type DisabledTimes = {
-  [date: string]: {
-    hours: number[];
-    minutes?: number[];
-    seconds?: number[];
-  }
-};
+{
+  day: 21, // Day of the month
+  hours: [
+    {
+      start: 'Fri Jul 21 2024 00:00:00 GMT+0400 (Georgia Standard Time)',
+      end: 'Fri Jul 21 2024 00:10:00 GMT+0400 (Georgia Standard Time)'
+    },
+    {
+      start: 'Fri Jul 21 2024 17:10:00 GMT+0400 (Georgia Standard Time)',
+      end: 'Fri Jul 21 2024 18:10:00 GMT+0400 (Georgia Standard Time)'
+    }
+  ]
+},
+];
 
 const Home = () => {
-  const [selectedDate, setSelectedDate] = useState(dayjs());
+  const [startDate, setStartDate] = useState(new Date());
 
-  const onChange: DatePickerProps['onChange'] = (date, dateStr) => {
-    setSelectedDate(date ? dayjs(date) : dayjs());
-    console.log('onChange:', dateStr);
+  const handleChange = (date: any) => {
+    setStartDate(date);
+    console.log(date);
   };
 
-  // Custom disabledTime function to disable hours dynamically
-  const disabledDateTime = (currentDate: dayjs.Dayjs | null) => {
-    if (!currentDate) return { disabledHours: () => [], disabledMinutes: () => [], disabledSeconds: () => [] };
+  // Helper function to parse date strings
+  const parseDateString = (dateString: string) => new Date(dateString);
 
-    const currentDateStr = currentDate.format('YYYY-MM-DD');
-    
-    // Define ranges for disabling times
-    const disabledTimes: DisabledTimes = {
-      "2024-07-19": { hours: range(3, 5), minutes: range(3, 5) },
-      "2024-07-20": { hours: range(4, 13), minutes: range(30, 60) },
-      "2024-07-21": { hours: range(15, 17) }
-    };
+  // Custom function to disable specific times based on bookedDates array
+  const filterTime = (time: Date) => {
+    const date = new Date(time);
+    const day = date.getDate();
+    const bookedDay = bookedDates.find(booked => booked.day === day);
 
-    // Get the disabled hours and minutes based on the current date
-    const disabledTime = disabledTimes[currentDateStr as keyof DisabledTimes] || {};
+    if (bookedDay) {
+      return bookedDay.hours.every(hourRange => {
+        const start = parseDateString(hourRange.start);
+        const end = parseDateString(hourRange.end);
+        return date < start || date >= end;
+      });
+    }
 
-    return {
-      disabledHours: () => disabledTime.hours || [],
-      disabledMinutes: () => disabledTime.minutes || [],
-      disabledSeconds: () => disabledTime.seconds || []
-    };
+    return true;
   };
 
   return (
     <div className="home">
       <DatePicker
-        defaultValue={selectedDate}
-        showTime={{ format: 'HH:mm', hideDisabledOptions: false }}
-        format="YYYY-MM-DD HH:mm"
-        onChange={onChange}
-        disabledTime={disabledDateTime}
+        id="datePicker"
+        selected={startDate}
+        onChange={handleChange}
+        className="custom-date-picker"
+        showTimeSelect
+        timeIntervals={5}
+        timeCaption="საათი"
+        timeFormat="HH:mm"
+        dateFormat="MMMM d, yyyy, h:mm"
+        minDate={new Date()}
+        isClearable
+        filterTime={filterTime} // Apply custom time filter
       />
     </div>
   );
