@@ -4,20 +4,20 @@ import 'react-datepicker/dist/react-datepicker.css';
 import "./BookingCalendar.css"
 
 const bookedDates = [
-    {
-      day: 19, // Day of the month
-      hours: [
-        {
-          start: 'Fri Jul 19 2024 00:00:00 GMT+0400 (Georgia Standard Time)',
-          end: 'Fri Jul 19 2024 00:10:00 GMT+0400 (Georgia Standard Time)'
-        },
-        {
-          start: 'Fri Jul 19 2024 17:10:00 GMT+0400 (Georgia Standard Time)',
-          end: 'Fri Jul 19 2024 18:10:00 GMT+0400 (Georgia Standard Time)'
-        }
-      ]
-    },
-  
+  {
+    day: 19, // Day of the month
+    hours: [
+      {
+        start: 'Fri Jul 19 2024 00:00:00 GMT+0400 (Georgia Standard Time)',
+        end: 'Fri Jul 19 2024 00:10:00 GMT+0400 (Georgia Standard Time)'
+      },
+      {
+        start: 'Fri Jul 19 2024 17:10:00 GMT+0400 (Georgia Standard Time)',
+        end: 'Fri Jul 19 2024 18:10:00 GMT+0400 (Georgia Standard Time)'
+      }
+    ]
+  },
+
   {
     day: 21, // Day of the month
     hours: [
@@ -31,11 +31,11 @@ const bookedDates = [
       }
     ]
   },
-  ];
+];
 
 const BookingCalendar = () => {
 
-    const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
 
   const handleChange = (date: any) => {
     setStartDate(date);
@@ -65,19 +65,20 @@ const BookingCalendar = () => {
 
   return (
     <DatePicker
-        id="datePicker"
-        selected={startDate}
-        onChange={handleChange}
-        className="custom-date-picker"
-        showTimeSelect
-        timeIntervals={5}
-        timeCaption="საათი"
-        timeFormat="HH:mm"
-        dateFormat="MMMM d, yyyy, h:mm"
-        minDate={new Date()}
-        isClearable
-        filterTime={filterTime} // Apply custom time filter
-      />
+      id="datePicker"
+      selected={startDate}
+      placeholderText='Choose Date'
+      onChange={handleChange}
+      className="custom-date-picker"
+      showTimeSelect
+      timeIntervals={5}
+      timeCaption="საათი"
+      timeFormat="HH:mm"
+      dateFormat="MMMM d, yyyy, h:mm"
+      minDate={new Date()}
+      isClearable
+      filterTime={filterTime} // Apply custom time filter
+    />
   )
 }
 

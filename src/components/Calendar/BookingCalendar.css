@@ -3,6 +3,8 @@
     padding: 8px;
     border-radius: 6px;
     cursor: pointer;
+    font-family: "Poppins";
+    font-weight: 500;
 }
 
 .react-datepicker-popper {
