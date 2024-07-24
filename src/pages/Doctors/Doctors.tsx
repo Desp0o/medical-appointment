@@ -2,7 +2,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
 import { useEffect, useState } from "react";
 import "./doctors.css"
-import AddCrossIcon from "../../assets/AddCrossIcon";
+import AddNewDoctor from "./AddNewDoctor";
 
 interface Doctor {
     id: string;
@@ -33,13 +33,11 @@ const Doctors = () => {
         console.log(docDb);
     }, []);
 
+
+
     return (
         <div className="doctors_main_page">
-            <div className="add_new_doc">
-                <p className="add_new_doc_para">add new doctor</p>
-                <AddCrossIcon />
-            </div>
-
+            <AddNewDoctor />
             <div className="doctor_map">
                 {docDb.length > 0 ? (
                     docDb.map((doc) => (

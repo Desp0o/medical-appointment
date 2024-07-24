@@ -18,6 +18,13 @@
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
+
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.add_new_doc.active{
+    background-color: var(--secondary-purple);
 }
 
 .add_new_doc_para{
