@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux'
 import { setUser } from './redux/userSlicer'
 import Spinner from './components/spinner/Spinner'
 import PageLayout from './components/pageLayout/PageLayout'
+import Doctors from './pages/Doctors/Doctors'
 
 
 function App() {
@@ -70,6 +71,7 @@ function App() {
       
         <Route element={<PrivateRoute />}>
           <Route path='/home' element={<Home />} />
+          <Route path='/doctors' element={<Doctors />} />
         </Route>
       </Routes>
     </PageLayout>

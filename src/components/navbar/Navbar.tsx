@@ -55,7 +55,7 @@ const Navbar = () => {
                     <NacIconBlock child={<CalendarIcon />} />
                 </Link>
 
-                <Link to='/' className='block_wrapper' onClick={() => tabHandler("staff")}>
+                <Link to='/doctors' className='block_wrapper' onClick={() => tabHandler("staff")}>
                     {activeTab === 'staff' && <span className='block_border_left' />}
                     <NacIconBlock child={<Staff />} />
                 </Link>
