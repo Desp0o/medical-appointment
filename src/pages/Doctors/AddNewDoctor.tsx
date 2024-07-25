@@ -4,8 +4,11 @@ import { collection, addDoc } from 'firebase/firestore';
 import { db } from "../../firebaseConfig";
 import FlexibleButton from '../../components/buttons/FlexibleButton';
 import CloseIcon from '../../assets/CloseIcon';
+import { useDispatch } from 'react-redux';
+import { setActivateTrigger } from '../../redux/triggerSlice';
 
 const AddNewDoctor = () => {
+    const dispatch = useDispatch()
     const [bgHandler, setBgHandler] = useState("add_new_doc")
     const [modalTrigger, setModalTrigger] = useState(false)
     const [docInfo, setDocInfo] = useState({
@@ -28,6 +31,7 @@ const AddNewDoctor = () => {
             const docRef = await addDoc(collectionRef, docInfo);
             console.log("Document written with ID: ", docRef.id);
             setModalTrigger(false)
+            dispatch(setActivateTrigger())
         } catch (e) {
             console.error("Error adding document: ", e);
         }
