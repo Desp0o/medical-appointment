@@ -3,6 +3,7 @@ import AddCrossIcon from "../../assets/AddCrossIcon";
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from "../../firebaseConfig";
 import FlexibleButton from '../../components/buttons/FlexibleButton';
+import CloseIcon from '../../assets/CloseIcon';
 
 const AddNewDoctor = () => {
     const [bgHandler, setBgHandler] = useState("add_new_doc")
@@ -26,6 +27,7 @@ const AddNewDoctor = () => {
             const collectionRef = collection(db, "doctors");
             const docRef = await addDoc(collectionRef, docInfo);
             console.log("Document written with ID: ", docRef.id);
+            setModalTrigger(false)
         } catch (e) {
             console.error("Error adding document: ", e);
         }
@@ -50,6 +52,10 @@ const AddNewDoctor = () => {
             {
                 modalTrigger && <div className='new_doc_add_modal'>
                 <form className='new_doc_form' onSubmit={docSumbitHandler}>
+                    <span className='add_modal_close' onClick={()=>setModalTrigger(false)}>
+                        <CloseIcon />
+                    </span>
+
                     <p style={{textAlign:"center", fontWeight:"500"}}>Doctor info</p>
                     <div>
                         <label className='doctor_input_labels'>Name</label>
@@ -91,9 +97,7 @@ const AddNewDoctor = () => {
                         />
                     </div>
 
-                    <span onClick={docSumbitHandler}>
                         <FlexibleButton btnHeight={40} btnText='Submit' />
-                    </span>
                 </form>
             </div>
             }
