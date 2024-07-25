@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import AddCrossIcon from "../../assets/AddCrossIcon";
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from "../../firebaseConfig";
 import FlexibleButton from '../../components/buttons/FlexibleButton';
 
 const AddNewDoctor = () => {
@@ -13,22 +15,25 @@ const AddNewDoctor = () => {
     })
 
     const mouseDownHandler = () => {
-        setBgHandler("add_new_doc active")
         setModalTrigger(true)
     }
 
-    const mouseUpHandler = () => {
-        setBgHandler("add_new_doc")
-    }
-
-    const docSumbitHandler = (e: { preventDefault: () => void; }) => {
+    const docSumbitHandler = async (e: { preventDefault: () => void; }) => {
         e.preventDefault()
         console.log(docInfo);
+
+        try {
+            const collectionRef = collection(db, "doctors");
+            const docRef = await addDoc(collectionRef, docInfo);
+            console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
     }
 
     return (
         <>
-            <div className={bgHandler} onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}>
+            <div className={bgHandler} onClick={mouseDownHandler}>
                 <p className="add_new_doc_para">add new doctor</p>
                 <AddCrossIcon />
             </div>
@@ -45,6 +50,7 @@ const AddNewDoctor = () => {
             {
                 modalTrigger && <div className='new_doc_add_modal'>
                 <form className='new_doc_form' onSubmit={docSumbitHandler}>
+                    <p style={{textAlign:"center", fontWeight:"500"}}>Doctor info</p>
                     <div>
                         <label className='doctor_input_labels'>Name</label>
                         <input
@@ -58,6 +64,7 @@ const AddNewDoctor = () => {
                         />
 
                     </div>
+
                     <div>
                         <label className='doctor_input_labels'>Profile</label>
                         <input

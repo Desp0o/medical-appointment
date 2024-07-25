@@ -25,6 +25,10 @@
     user-select: none;
 }
 
+.add_new_doc:hover{
+    background-color: var(--secondary-purple);
+}
+
 .add_new_doc.active{
     background-color: var(--secondary-purple);
 }
