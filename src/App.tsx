@@ -5,18 +5,17 @@ import PrivateRoute from './components/PrivateRoutes'
 import Home from './pages/Home/Home'
 import { UseUserHook } from './hooks/UseUserHook'
 import PublicRoute from './components/PublicRoute'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { setUser } from './redux/userSlicer'
-import Spinner from './components/spinner/Spinner'
 import PageLayout from './components/pageLayout/PageLayout'
+import Doctors from './pages/Doctors/Doctors'
 
 
 function App() {
   const dispatch = useDispatch()
   const { user } = UseUserHook()
-  const [isLoading, setLoading] = useState(true)
 
   useEffect(()=>{
     const token = localStorage.getItem('token')
@@ -50,8 +49,6 @@ function App() {
           isAuthenticated: false,
           userID: null
         }))
-      }finally{
-        setLoading(false)
       }
     }
 
@@ -62,7 +59,6 @@ function App() {
   return (
     <PageLayout>
       {user.isAuthenticated && <Navbar />}
-      {isLoading && <Spinner />}
       <Routes>
         <Route element={<PublicRoute />}>
         <Route path='/' element={<LogIn />} />
@@ -70,6 +66,7 @@ function App() {
       
         <Route element={<PrivateRoute />}>
           <Route path='/home' element={<Home />} />
+          <Route path='/doctors' element={<Doctors />} />
         </Route>
       </Routes>
     </PageLayout>

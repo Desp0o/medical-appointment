@@ -32,6 +32,15 @@ button{
   border: none;
 }
 
+.overlay{
+  background-color: rgba(0, 0, 0, 0.407);
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
 body {
   width: 100%;
   height: 100vh;

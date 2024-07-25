@@ -36,9 +36,15 @@ const bookedDates = [
 const BookingCalendar = () => {
 
   const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   const handleChange = (date: any) => {
     setStartDate(date);
+    console.log(date);
+  };
+
+  const handleChangeEndDate = (date: any) => {
+    setEndDate(date);
     console.log(date);
   };
 
@@ -64,6 +70,7 @@ const BookingCalendar = () => {
 
 
   return (
+    <div className='calendars'>
     <DatePicker
       id="datePicker"
       selected={startDate}
@@ -79,6 +86,22 @@ const BookingCalendar = () => {
       isClearable
       filterTime={filterTime} // Apply custom time filter
     />
+<DatePicker
+      id="datePicker"
+      selected={endDate}
+      placeholderText='Choose Date'
+      onChange={handleChangeEndDate}
+      className="custom-date-picker"
+      showTimeSelect
+      timeIntervals={5}
+      timeCaption="საათი"
+      timeFormat="HH:mm"
+      dateFormat="MMMM d, yyyy, h:mm"
+      minDate={new Date()}
+      isClearable
+      filterTime={filterTime} // Apply custom time filter
+    />
+    </div>
   )
 }
 
