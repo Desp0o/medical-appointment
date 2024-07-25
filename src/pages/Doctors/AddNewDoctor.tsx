@@ -17,6 +17,14 @@ const AddNewDoctor = () => {
                 <p className="add_new_doc_para">add new doctor</p>
                 <AddCrossIcon />
             </div>
+
+            <div className='overlay' />
+            <div className='new_doc_add_modal'>
+                    <form className='new_doc_form'>
+                        <input type='text' name="name" placeholder='doc name' className='new_doc_input'/>
+                        <input type='text' name="profile" placeholder='doc profile' className='new_doc_input'/>
+                    </form>
+            </div>
         </>
     )
 }

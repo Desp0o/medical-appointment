@@ -3,6 +3,7 @@ import { db } from "../../firebaseConfig";
 import { useEffect, useState } from "react";
 import "./doctors.css"
 import AddNewDoctor from "./AddNewDoctor";
+import DocCard from "./DocCard";
 
 interface Doctor {
     id: string;
@@ -40,22 +41,18 @@ const Doctors = () => {
             <AddNewDoctor />
             <div className="doctor_map">
                 {docDb.length > 0 ? (
-                    docDb.map((doc) => (
-                        <div className="doc_card" key={doc.id}>
-                            <img src={doc.avatar} alt="doc image" className="doc_avatar" />
-
-                            <div className="doc_desc">
-                                <h3 className="doc_name">{doc.name}</h3>
-                                <h4 className="doc_profile">{doc.profile}</h4>
-                            </div>
-
-                            <div className="doc_booking">
-                                <p>Book now</p>
-                            </div>
-                        </div>
+                    docDb.map((doc, index) => (
+                        <DocCard 
+                            key={index}
+                            id={index} 
+                            name={doc.name} 
+                            avatar={doc.avatar} 
+                            workExp={doc.workExp} 
+                            profile={doc.profile} 
+                        />
                     ))
                 ) : (
-                    <p>No documents available.</p>
+                    <p>No doctors available please add new one</p>
                 )}
             </div>
         </div>

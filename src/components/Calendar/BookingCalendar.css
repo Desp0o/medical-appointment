@@ -1,5 +1,10 @@
+.calendars{
+    display: flex;
+    justify-content: space-between;
+}
+
 .custom-date-picker {
-    border: 2px solid var(--secondary_blue);
+    border: 1px solid var(--secondary_blue);
     padding: 8px;
     border-radius: 6px;
     cursor: pointer;
