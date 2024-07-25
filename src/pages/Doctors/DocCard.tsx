@@ -1,4 +1,5 @@
 import React from 'react'
+import FlexibleButton from '../../components/buttons/FlexibleButton';
 
 interface DocProps {
     id: number;
@@ -19,9 +20,7 @@ const DocCard: React.FC<DocProps> = ({id, avatar, name, profile, workExp}) => {
                 <h4 className="doc_profile">{workExp} years of experience</h4>
             </div>
 
-            <div className="doc_booking">
-                <p>Book now</p>
-            </div>
+            <FlexibleButton btnText={'Book now'} btnHeight={30}/>
         </div>
     )
 }

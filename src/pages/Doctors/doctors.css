@@ -84,27 +84,6 @@
     color: grey;
 }
 
-.doc_booking{
-    width: 100%;
-    height: 30px;
-    background-color: var(--secondary_blue);
-    border-radius: 8px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-
-    transition: all 0.3s ease;
-}
-
-.doc_booking:hover{
-    background-color: var(--secondary-purple);
-}
-
 .new_doc_add_modal{
     position: fixed;
     top: 50%;
@@ -137,4 +116,9 @@
 
 .booking_dates{
     position: relative;
+}
+
+.doctor_input_labels{
+    font-size: 12px;
+    font-size: 13px;
 }
