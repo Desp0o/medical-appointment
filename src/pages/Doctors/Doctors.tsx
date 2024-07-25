@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import "./doctors.css"
 import AddNewDoctor from "./AddNewDoctor";
 import DocCard from "./DocCard";
+import { UseTriggerHook } from "../../hooks/UseTriggerHook";
 
 interface Doctor {
     id: string;
@@ -12,6 +13,7 @@ interface Doctor {
 
 const Doctors = () => {
     const [docDb, setDocDb] = useState<Doctor[]>([]);
+    const { activateTrigger } = UseTriggerHook()
 
     const getDataBase = async () => {
         const collectionRef = collection(db, "doctors");
@@ -32,7 +34,7 @@ const Doctors = () => {
     useEffect(() => {
         getDataBase();
         console.log(docDb);
-    }, []);
+    }, [activateTrigger]);
 
 
 

@@ -101,7 +101,8 @@ const AddNewDoctor = () => {
                         />
                     </div>
 
-                        <FlexibleButton btnHeight={40} btnText='Submit' />
+                    <span style={{marginTop:"8px"}}/>
+                    <FlexibleButton btnHeight={40} btnText='Submit' />
                 </form>
             </div>
             }
