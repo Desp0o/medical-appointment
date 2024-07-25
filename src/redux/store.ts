@@ -8,7 +8,7 @@ const store = configureStore({
     reducer:{
         activeTabStore: activeTabSlice,
         userStore: userSlicer,
-        trigerStore: triggerSlice
+        triggerStore: triggerSlice
     }
 })
 
