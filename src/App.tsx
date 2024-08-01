@@ -11,11 +11,20 @@ import { useDispatch } from 'react-redux'
 import { setUser } from './redux/userSlicer'
 import PageLayout from './components/pageLayout/PageLayout'
 import Doctors from './pages/Doctors/Doctors'
+import { collection, getDocs } from 'firebase/firestore'
+import { db } from './firebaseConfig'
+import { setDocsLength } from './redux/doctorsLengthSlicer'
+import { UseTriggerHook } from './hooks/UseTriggerHook'
 
+interface Doctor {
+  id: string;
+  [key: string]: any; // Allow any additional fields
+}
 
 function App() {
   const dispatch = useDispatch()
   const { user } = UseUserHook()
+  const { activateTrigger } = UseTriggerHook()
 
   useEffect(()=>{
     const token = localStorage.getItem('token')
@@ -55,6 +64,27 @@ function App() {
     checkMe()
     
   },[dispatch])
+
+  const getDataBase = async () => {
+    const collectionRef = collection(db, "doctors");
+    const querySnapshot = await getDocs(collectionRef);
+
+    if (!querySnapshot.empty) {
+        const documents: Doctor[] = [];
+        querySnapshot.forEach((doc) => {
+            documents.push({ id: doc.id, ...doc.data() });
+        });
+        console.log(documents.length);
+        dispatch(setDocsLength(documents))
+        
+    } else {
+        console.log("No documents found!");
+    }
+};
+
+useEffect(() => {
+    getDataBase();
+}, [activateTrigger]);
 
   return (
     <PageLayout>
