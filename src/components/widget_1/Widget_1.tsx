@@ -1,3 +1,4 @@
+import DoctorsIcon from "../../assets/DoctorsIcon"
 import PatientIcon from "../../assets/PatientIcon"
 import SurgeryIcon from "../../assets/SurgeryIcon"
 import WidgetBlockComp from "../WidgetBlockComp"
@@ -8,6 +9,7 @@ const Widget_1 = () => {
     <div className="Widget_1">
         <WidgetBlockComp icon={<PatientIcon />} text="Patient" quantity={324} isFiled={true}/>
         <WidgetBlockComp icon={<SurgeryIcon />} text="Surgery" quantity={124} isFiled={false}/>
+        <WidgetBlockComp icon={<DoctorsIcon />} text="Doctors" quantity={124} isFiled={false}/>
     </div>
   )
 }
