@@ -25,6 +25,8 @@ const Doctors = () => {
                 documents.push({ id: doc.id, ...doc.data() });
             });
             setDocDb(documents);
+            console.log(documents.length);
+            
         } else {
             console.log("No documents found!");
             setDocDb([]);
