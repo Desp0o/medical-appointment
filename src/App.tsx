@@ -26,26 +26,26 @@ function App() {
   const { user } = UseUserHook()
   const { activateTrigger } = UseTriggerHook()
 
-  useEffect(()=>{
+  useEffect(() => {
     const token = localStorage.getItem('token')
     const checkMe = async () => {
       try {
         const res = await axios.get(import.meta.env.VITE_CHECK_USER, {
-              headers: {
-                  Authorization: `Bearer ${token}`,
-                  'Content-Type': 'application/json'
-              }
-          });
-  
-      localStorage.setItem("userName", res.data.name)
-      localStorage.setItem("userID", res.data.id)
-      localStorage.setItem("isAuthenticated", "true")
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
 
-      dispatch(setUser({
-        userName: res.data.name,
-        isAuthenticated: true,
-        userID: res.data.id
-      }))
+        localStorage.setItem("userName", res.data.name)
+        localStorage.setItem("userID", res.data.id)
+        localStorage.setItem("isAuthenticated", "true")
+
+        dispatch(setUser({
+          userName: res.data.name,
+          isAuthenticated: true,
+          userID: res.data.id
+        }))
       } catch (error) {
         localStorage.removeItem('token')
         localStorage.removeItem('userName')
@@ -62,38 +62,38 @@ function App() {
     }
 
     checkMe()
-    
-  },[dispatch])
+
+  }, [dispatch])
 
   const getDataBase = async () => {
     const collectionRef = collection(db, "doctors");
     const querySnapshot = await getDocs(collectionRef);
 
     if (!querySnapshot.empty) {
-        const documents: Doctor[] = [];
-        querySnapshot.forEach((doc) => {
-            documents.push({ id: doc.id, ...doc.data() });
-        });
-        console.log(documents.length);
-        dispatch(setDocsLength(documents))
-        
-    } else {
-        console.log("No documents found!");
-    }
-};
+      const documents: Doctor[] = [];
+      querySnapshot.forEach((doc) => {
+        documents.push({ id: doc.id, ...doc.data() });
+      });
+      console.log(documents.length);
+      dispatch(setDocsLength(documents))
 
-useEffect(() => {
+    } else {
+      console.log("No documents found!");
+    }
+  };
+
+  useEffect(() => {
     getDataBase();
-}, [activateTrigger]);
+  }, [activateTrigger]);
 
   return (
     <PageLayout>
       {user.isAuthenticated && <Navbar />}
       <Routes>
         <Route element={<PublicRoute />}>
-        <Route path='/' element={<LogIn />} />
+          <Route path='/' element={<LogIn />} />
         </Route>
-      
+
         <Route element={<PrivateRoute />}>
           <Route path='/home' element={<Home />} />
           <Route path='/doctors' element={<Doctors />} />
