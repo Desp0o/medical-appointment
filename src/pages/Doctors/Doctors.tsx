@@ -27,7 +27,7 @@ const Doctors = () => {
             setDocDb(documents);
         } else {
             console.log("No documents found!");
-            setDocDb([]); // Ensure state is empty if no documents are found
+            setDocDb([]);
         }
     };
 
@@ -46,7 +46,7 @@ const Doctors = () => {
                     docDb.map((doc, index) => (
                         <DocCard 
                             key={index}
-                            id={index} 
+                            id={doc.id} 
                             name={doc.name} 
                             avatar={doc.avatar} 
                             workExp={doc.workExp} 

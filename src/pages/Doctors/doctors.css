@@ -46,8 +46,9 @@
 }
 
 .doc_card{
+    position: relative;
     width: 250px;
-    padding: 16px;
+    padding: 32px 16px 16px 16px;
 
     box-shadow: 3px 10px 18px 0px rgba(0, 0, 0, 0.18);
     -webkit-box-shadow: 3px 10px 18px 0px rgba(0, 0, 0, 0.18);
@@ -132,4 +133,23 @@
     position: absolute;
     top: 16px;
     right: 16px;
+}
+
+.setting_dots_style{
+    cursor: pointer;
+
+    position: absolute;
+    right: 16px;
+    top: 8px;
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    vertical-align: middle;
+    text-align: center;
+    justify-content: center;
+    line-height: 5px;
+    font-size: 20px;
 }
