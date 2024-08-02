@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FlexibleButton from '../../components/buttons/FlexibleButton';
 import { DeleteDoctor } from './DeleteDoctor';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
 
 interface DocProps {
     id: string;
@@ -15,6 +17,25 @@ interface DocProps {
 
 const DocCard: React.FC<DocProps> = ({ id, avatar, name, profile, workExp, index, activeIndex, handlePanelVisibility }) => {
     const { docDeleteHandler } = DeleteDoctor();
+    const [doctor, setDoctor] = useState<any>(null); 
+
+    const getSingleDocInfo = async () => {
+        try {
+            const docRef = doc(db, "doctors", id);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                setDoctor(docSnap.data());
+            } else {
+                console.log("No such document!");
+            }
+        } catch (e) {
+            
+            console.error("Error fetching document: ", e);
+        } finally {
+            console.log(doctor);
+        }
+    }
 
     return (
         <div className="doc_card" key={id}>
@@ -23,7 +44,7 @@ const DocCard: React.FC<DocProps> = ({ id, avatar, name, profile, workExp, index
 
                 {activeIndex === index && (
                     <div className='setting_panel'>
-                        <p className='setting_pannel_paragraph'>Edit Doctor</p>
+                        <p className='setting_pannel_paragraph' onClick={getSingleDocInfo}>Edit Doctor</p>
                         <p className='setting_pannel_paragraph del' onClick={() => docDeleteHandler(id)}>Delete Doctor</p>
                     </div>
                 )}
